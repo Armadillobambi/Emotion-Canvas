@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from transformers import pipeline
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the pre-trained emotion detection model
 emotion_classifier = pipeline('text-classification', model='ayoubkirouane/BERT-Emotions-Classifier', return_all_scores=True)
