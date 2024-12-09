@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <title>Emotion Canvas - Welcome</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #85C1E9, #F9E79F);
+            font-family: Poppins;
+        }
+        h1 {
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #34495E;
+            font-size: 1.2em;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #48C9B0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: Poppins;
+        }
+        button:hover {
+            background-color: #1ABC9C;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Emotion Canvas</h1>
+    <p>Discover the connection between emotions and colors through our interactive canvas. Type any sentence to see your emotions come alive in a vibrant visual experience.</p>
+    <button onclick="startExperience()">Start the Experience</button>
+
+    <script>
+        function startExperience() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

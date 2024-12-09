@@ -1,13 +1,22 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+const prompts = [
+    "How are you feeling right now?",
+    "What emotion best describes your current mood?",
+    "Can you describe how you're feeling in one word?",
+    "Write a sentence that expresses your current emotional state.",
+    "What's on your mind at this moment?",
+    "How does your heart feel right now?"
+];
+
+function getRandomPrompt() {
+    const randomIndex = Math.floor(Math.random() * prompts.length);
+    return prompts[randomIndex];
+}
+
+// Display the random prompt when the page loads
+const promptElement = document.getElementById('prompt');
+promptElement.textContent = getRandomPrompt();
+
 const inputBar = document.getElementById('inputBar');
-
-// Set canvas size
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
-
-// Keep track of the current canvas state
-let colors = [];
 
 inputBar.addEventListener('keypress', async (e) => {
     if (e.key === 'Enter') {
@@ -29,22 +38,11 @@ inputBar.addEventListener('keypress', async (e) => {
         const data = await response.json();
         const { color } = data;
 
-        // Update the canvas
-        colors.push(color);
-        drawCanvas(colors);
+        // Update the background color based on emotion
+        document.body.style.backgroundColor = color;
 
         // Clear the input bar
         inputBar.value = '';
     }
 });
 
-function drawCanvas(colors) {
-    const width = canvas.width;
-    const height = canvas.height;
-    const colorHeight = height / colors.length;
-
-    for (let i = 0; i < colors.length; i++) {
-        ctx.fillStyle = colors[i];
-        ctx.fillRect(0, i * colorHeight, width, colorHeight);
-    }
-}
