@@ -54,6 +54,7 @@ def analyze_emotion():
     highest_emotion = max(results[0], key=lambda x: x['score'])
     emotion = highest_emotion['label']
     color = emotion_to_color.get(emotion, "#FFFFFF")  # Default to white if not found
+    print(highest_emotion)
 
     return jsonify({'emotion': emotion, 'color': color})
 
