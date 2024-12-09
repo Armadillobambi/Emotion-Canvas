@@ -1,7 +1,7 @@
 from transformers import pipeline
 
 # Load pre-trained emotion detection pipeline
-emotion_classifier = pipeline('text-classification', model='ayoubkirouane/BERT-Emotions-Classifier', return_all_scores=True)
+emotion_classifier = pipeline('text-classification', model="SamLowe/roberta-base-go_emotions")
 
 # user_input = 'what\'s wrong with you'
 
@@ -31,5 +31,5 @@ while True:
     # Print the results
     print("Emotions detected:")
     print(results)
-    for result in results:
-        print(f" - {result['label']}: {result['score']:.2f}")
+    # for result in results:
+    #     print(f" - {result['label']}: {result['score']:.2f}")
