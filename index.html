@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
     <title>Emotion Canvas</title>
     <style>
         body {
@@ -17,7 +20,7 @@
             justify-content: center;
             position: relative;
             text-align: center;
-            background-color: #9fc7e1;
+            background-color: #000000;
         }
 
         header button {
@@ -29,10 +32,10 @@
             cursor: pointer;
             font-family: Poppins;
         }
-
+/* 
         header button:hover {
             background-color: #DC7633;
-        }
+        } */
 
         #prompt {
             font-size: 1.5em;
@@ -68,6 +71,7 @@
 <body>
     <div id="prompt"></div>
     <input type="text" id="inputBar" placeholder="Type a sentence and press Enter">
+    <script src="particle.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
