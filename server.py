@@ -40,6 +40,38 @@ emotion_to_color = {
     "neutral": "#D5DBDB"       # Light gray
 }
 
+# Map emotions to music
+emotion_to_music = {
+    "admiration": "music/admiration.mp3",   
+    "amusement": "music/amusement.mp3",    
+    "anger": "music/anger.mp3",       
+    "annoyance": "music/annoyance.mp3",    
+    "approval": "music/approval.mp3",     
+    "caring": "music/caring.mp3",       
+    "confusion": "music/confusion.mp3",    
+    "curiosity": "music/curiosity.mp3",    
+    "desire": "music/desire.mp3",       
+    "disappointment": "music/disappointment.mp3",  
+    "disapproval": "music/disapproval.mp3",  
+    "disgust": "music/disgust.mp3",      
+    "embarrassment": "music/embarrassment.mp3",
+    "excitement": "music/excitement.mp3",   
+    "fear": "music/fear.mp3",         
+    "gratitude": "music/gratitude.mp3",   
+    "grief": "music/grief.mp3",        
+    "joy": "music/joy.mp3",          
+    "love": "music/love.mp3",         
+    "nervousness": "music/nervousness.mp3",  
+    "optimism": "music/optimism.mp3",     
+    "pride": "music/pride.mp3",        
+    "realization": "music/realization.mp3",  
+    "relief": "music/relief.mp3",       
+    "remorse": "music/remorse.mp3",      
+    "sadness": "music/sadness.mp3",      
+    "surprise": "music/surprise.mp3",     
+    "neutral": "music/neutral.mp3"       
+}
+
 @app.route('/analyze', methods=['POST'])
 def analyze_emotion():
     data = request.json
@@ -54,10 +86,11 @@ def analyze_emotion():
     highest_emotion = max(results[0], key=lambda x: x['score'])
     emotion = highest_emotion['label']
     color = emotion_to_color.get(emotion, "#FFFFFF")  # Default to white if not found
+    music = emotion_to_music.get(emotion, "music/neutral.mp3") # Default to neutral music if not found
     print(highest_emotion)
     print(color)
 
-    return jsonify({'emotion': emotion, 'color': color})
+    return jsonify({'emotion': emotion, 'color': color, 'music': music})
 
 if __name__ == '__main__':
     app.run(debug=True)

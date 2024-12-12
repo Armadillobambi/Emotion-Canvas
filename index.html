@@ -3,84 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
     <title>Emotion Canvas</title>
     <style>
-        /* body {
+        body {
             margin: 0;
+            padding: 0;
             height: 100vh;
-            font-family: Poppins, sans-serif;
+            font-family: 'Afacad', sans-serif;
+            overflow: hidden;
+            background-color: #000000; 
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: relative;
-            text-align: center; */
-            /* z-index: 10; */
-            /* background-color: #000000;
+            text-align: center;
         }
-
-        header button {
-            color: white;
-            background-color: #000000;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: Poppins;
+    
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
-
-        header button:hover {
-            background-color: #DC7633;
-        }
-
+    
         #prompt {
             font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #030f1c;
+            margin-bottom: 112px;
+            color: white;
             font-weight: 600;
             position: relative;
             z-index: 2; 
         }
 
-        #inputBar {
-            width: 60%;
-            padding: 15px;
-            font-size: 1.2em;
-            border: 2px solid #34495E;
-            border-radius: 10px;
-            text-align: center;
-            outline: none;
-            font-family: Poppins, sans-serif; */
-            /* position: relative; */
-            /* z-index: 2; 
+        header {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 3; 
         }
-
-        #inputBar:focus {
-            border-color: #F5B041;
-        } */
-
-        /* canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        } */
+    
+        header button {
+            color: white;
+            background-color: #ae2543;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Afacad', sans-serif;
+        }
+    
+        header button:hover {
+            background-color: #04568c; 
+        }
     </style>
+    
 </head>
 <header style="position: fixed; top: 10px; left: 10px;">
     <button onclick="window.location.href='home.html'">Back to Home Page</button>
 </header>
 <body>
     <div id="prompt"></div>
-    <!-- <input type="text" id="inputBar" placeholder="Type a sentence and press Enter"> -->
     <script src="particle.js"></script>
     <script src="script.js"></script>
-    <!-- <script src="sketch.js"></script> -->
-    <!-- <script src="test.js"></script> -->
+    <script src="prompt.js"></script>
+    <audio id="emotionAudio" style="display: none;" loop></audio>
 </body>
 </html>
