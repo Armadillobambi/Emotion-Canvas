@@ -1,4 +1,3 @@
-
 // Flow field parameters
 let scl = 10;
 let inc = 0.1;
@@ -8,37 +7,54 @@ let angTurn = 1;
 let cols, rows, zoff = 0;
 let particles = [];
 let flowfield;
-var hu = 0;
-var input = 0;
+let hu = 0;
 
-// Particle display parameters
 let sat = 100, brt = 100, alph = 10, partStroke = 1;
-let emotionColor = { h: 0, s: 100, b: 100 }; // Default HSB color for the emotion
+let emotionColor = { h: 0, s: 100, b: 100 };
 let animationStarted = false;
 
-let inputBar;
-
+let recognition;
+let recognizing = false;
 let currentMusic;
+
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     colorMode(HSB, 359, 100, 100, 100);
 
-    // Create and style the input bar dynamically
-    inputBar = createInput();
-    inputBar.size(450);
-    inputBar.style('font-size', '18px');
-    inputBar.style('padding', '10px');
-    inputBar.style('border', '2px solid #34495E');
-    inputBar.style('border-radius', '10px');
-    inputBar.style('outline', 'none');
-    inputBar.style('text-align', 'center');
-    inputBar.style('font-family', 'Afacad, sans-serif');
-    inputBar.style('position', 'relative');
-    inputBar.style('z-index', '2');
+    // Initialize speech recognition
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false; // Listen for a single sentence at a time
+        recognition.interimResults = false; // Don't show intermediate results
+        recognition.lang = 'en-US'; // Set language
 
-    audioElement = createAudio('');
-    audioElement.style('display', 'none');
+        recognition.onstart = () => {
+            recognizing = true;
+            console.log("Listening...");
+        };
+
+        recognition.onresult = (event) => {
+            const sentence = event.results[0][0].transcript;
+            console.log("You said:", sentence);
+            handleInput(sentence); // Process the sentence after speech
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error:", event.error);
+        };
+
+        recognition.onend = () => {
+            recognizing = false;
+            console.log("Stopped listening.");
+            // Restart recognition for continuous listening
+            recognition.start();
+        };
+    } else {
+        console.error("Speech recognition not supported in this browser.");
+    }
 
     cols = floor(width / scl);
     rows = floor(height / scl);
@@ -49,13 +65,9 @@ function setup() {
     }
 
     background(0);
-}
 
-function keyPressed() {
-    if (keyCode === ENTER) {
-        handleInput(inputBar.value());
-        inputBar.value(''); // Clear after submission
-    }
+    // Start listening
+    if (recognition) recognition.start();
 }
 
 function draw() {
@@ -75,18 +87,16 @@ function draw() {
             zoff += zOffInc;
         }
 
-        // Update particles
         for (let i = 0; i < particles.length; i++) {
             particles[i].follow(flowfield);
             particles[i].update();
             particles[i].edges();
             particles[i].show();
         }
-    // hu = emotionColor.h; // Dynamic hue
     }
 }
 
-// Function to handle user input
+// Function to handle speech input
 function handleInput(sentence) {
     if (!sentence.trim()) return;
 
@@ -99,7 +109,7 @@ function handleInput(sentence) {
         .then(data => {
             const color = hexToHsb(data.color);
             emotionColor = { h: color.h, s: color.s, b: color.b };
-            hu = emotionColor.h
+            hu = emotionColor.h;
             animationStarted = true;
 
             playEmotionMusic(data.music);
@@ -128,7 +138,7 @@ function hexToHsb(hex) {
     return { h, s, b: br };
 }
 
-function playEmotionMusic(musicFile){
+function playEmotionMusic(musicFile) {
     console.log("Playing music: ", musicFile);
     if (currentMusic) 
         currentMusic.stop();
