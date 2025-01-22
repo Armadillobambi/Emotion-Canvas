@@ -34,7 +34,7 @@
         }
     
         #prompt {
-            font-size: 1.5em;
+            font-size: 2.5em;
             margin-bottom: 112px;
             color: white;
             font-weight: 600;
@@ -48,26 +48,25 @@
             left: 10px;
             z-index: 3; 
         }
-    
-        header button {
-            color: white;
-            background-color: #ae2543;
-            padding: 10px;
+        .timeout-button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: #fff;
+            background-color: #04568c;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
             font-family: 'Afacad', sans-serif;
         }
     
-        header button:hover {
-            background-color: #04568c; 
+        .timeout-button:hover {
+            background-color: #ae2543;
         }
     </style>
     
 </head>
-<header style="position: fixed; top: 10px; left: 10px;">
-    <button onclick="window.location.href='home.html'">Back to Home Page</button>
-</header>
+
 <body>
     <div id="prompt"></div>
     <script src="particle.js"></script>

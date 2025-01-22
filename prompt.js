@@ -1,10 +1,5 @@
 const prompts = [
-    "How are you feeling right now?",
-    "What emotion best describes your current mood?",
-    "Can you describe how you're feeling in one word?",
-    "Write a sentence that expresses your current emotional state.",
-    "What's on your mind at this moment?",
-    "How does your heart feel right now?"
+    "Now, tell us how you feel today? "
 ];
 
 function getRandomPrompt() {

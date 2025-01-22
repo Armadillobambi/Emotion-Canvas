@@ -20,6 +20,11 @@ let currentMusic;
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
+let timeoutLimit = 180000; // 3 minutes
+let lastInteractionTime = Date.now();
+
+let timeoutMessageShown = false;
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     colorMode(HSB, 359, 100, 100, 100);
@@ -40,6 +45,7 @@ function setup() {
             const sentence = event.results[0][0].transcript;
             console.log("You said:", sentence);
             handleInput(sentence); // Process the sentence after speech
+            lastInteractionTime = Date.now();
         };
 
         recognition.onerror = (event) => {
@@ -71,6 +77,12 @@ function setup() {
 }
 
 function draw() {
+
+        // Check for timeout
+        if (Date.now() - lastInteractionTime > timeoutLimit && !timeoutMessageShown) {
+            showTimeoutMessage();
+        }
+
     if (animationStarted) {
         var yoff = 0;
         for (var y = 0; y < rows; y++) {
@@ -147,5 +159,30 @@ function playEmotionMusic(musicFile) {
         currentMusic.play();
     }, (error) => {
         console.error('Failed to load music file: ', error);
+    });
+}
+
+function showTimeoutMessage() {
+    timeoutMessageShown = true;
+
+    const prompt = document.getElementById('prompt');
+    prompt.style.display = 'none';
+    animationStarted = false;
+    background(0);
+
+
+    // Create a message and button to restart
+    let timeoutMessage = createDiv("Always feel free to express your emotions!");
+    timeoutMessage.style('color', 'white');
+    timeoutMessage.style('font-size', '2em');
+    timeoutMessage.style('text-align', 'center');
+    timeoutMessage.style('margin', '0');
+    timeoutMessage.position(windowWidth / 2 - 250, windowHeight / 2 - 100);
+
+    let restartButton = createButton('Restart');
+    restartButton.addClass('timeout-button');  
+    restartButton.position(windowWidth / 2 - 70, windowHeight / 2 + 50);
+    restartButton.mousePressed(() => {
+        window.location.reload();  // Restart the experience by reloading the page
     });
 }
