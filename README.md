@@ -13,7 +13,7 @@ This is then relayed back to the script file that changes the color of the noise
 ### Setup instructions
 
 In order to run the program, the server.py file should first be run. After that's up, open the home.html using a live server, after which you can use the program as intended. 
-**Important to note:** Open the live server in Google Chrome, otherwise the Web Speech API will block the program from running appropriately.
+**Important to note:** You should open the live server in Google Chrome, otherwise the Web Speech API will block the program from running appropriately.
 
 ### Example
 
