@@ -17,7 +17,7 @@ In order to run the program, the server.py file should first be run. After that'
 
 ### Example
 
-https://github.com/user-attachments/assets/04430a21-6e82-4a30-aa23-363f6bb07039
+https://github.com/user-attachments/assets/ff891bea-5dec-42fe-8965-b5dcf28b3034
 
 ### Contact
 
