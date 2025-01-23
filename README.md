@@ -1,4 +1,4 @@
-# Emotion Canvas
+# Emotion *Canvas*
 
 ### Description
 
